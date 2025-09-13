@@ -1,0 +1,51 @@
+Title:
+
+Normalization Report – Library Database
+
+1. Introduction
+
+This report explains how the library database schema has been designed and normalized up to the Third Normal Form (3NF). The aim is to ensure data integrity, reduce redundancy, and improve query efficiency.
+
+2. Entities and Attributes
+Table Name	Attributes
+Publishers	PublisherID (PK), PublisherName
+Books	BookID (PK), Title, PublisherID (FK), YearPublished
+Authors	AuthorID (PK), AuthorName
+BooksAuthors	BookID (FK), AuthorID (FK)
+Members	MemberID (PK), Name, Address, PhoneNumber
+BookLoans	LoanID (PK), BookID (FK), MemberID (FK), LoanDate, ReturnDate
+3. Normalization Steps
+
+First Normal Form (1NF):
+
+Each attribute contains atomic values.
+
+No repeating groups or arrays.
+
+Example: Instead of storing multiple authors in one field, the BooksAuthors join table is used to link books and authors.
+
+Second Normal Form (2NF):
+
+All non-key attributes are fully dependent on the whole primary key.
+
+Example: Title depends on BookID, not on AuthorID. So, Title is stored in the Books table, not in BooksAuthors.
+
+Third Normal Form (3NF):
+
+No transitive dependencies exist.
+
+Example: Publisher details are stored in the Publishers table. PublisherID in Books acts as a foreign key, ensuring that PublisherName is not duplicated across books.
+
+4. Benefits of Normalization
+
+Data consistency: Information such as publisher details is stored in one place.
+
+Redundancy is reduced: Data duplication is avoided.
+
+Scalability: Adding more books, authors, or loans does not increase complexity.
+
+Improved query performance: Related data can be joined efficiently.
+
+Final Notes
+
+This database schema follows the principles of relational design, ensuring normalized data structures that enhance both maintainability and integrity.
